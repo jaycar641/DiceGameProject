@@ -24,7 +24,7 @@ function gameFlow (diceselected)
 function rollDice (randomNum) 
 {
 	
-	let result = Math.floor((Math.random() * randomNum) + 1);
+	let result = Math.floor((Math.random() * (randomNum) + 1));
 	return result;
 
 }
@@ -43,7 +43,7 @@ function pointsSystem(usingdice1,diceresult, pointtotal)
 		if (diceresult == usingdice1 ) 
 		{
 			console.log("You were approached by a wild animal an was mortally wounded!  Gameover!")
-			pointtotal = 0;
+			pointTotal = 0;
 			totalDistance = 0;
 			
 		}
@@ -52,14 +52,14 @@ function pointsSystem(usingdice1,diceresult, pointtotal)
 		else if (diceresult == usingdice1/3 || diceresult == usingdice1/6) 
 		{
 			console.log("You fell into a pit!  You've lost 15 points!")
-			pointtotal -= 15;
+			pointTotal -= 15;
 
 		}	
 
 		else if (diceresult == 5 || usingdice1 == 1) // 5, 8, 12, or 10
 		{
 			console.log("You were approached by a wild animal an was seriously wounded!  You've lost 30 points!")
-			pointtotal -= 30;
+			pointTotal -= 30;
 
 		}
 		else if (usingdice1 != 10 && diceresult == usingdice1/2) 
@@ -71,16 +71,16 @@ function pointsSystem(usingdice1,diceresult, pointtotal)
 		{
 
 			console.log("You found treasure!")
-			pointtotal += 20;
+			pointTotal += 20;
 		}
 
-		if (pointtotal <= 0) 
+		if (pointTotal <= 0) 
 		{
-			pointtotal = 0
+			pointTotal = 0
 
 		}
 
-		return pointtotal;
+		return pointTotal;
 
 }
 
@@ -115,15 +115,14 @@ function resetGame()
 		if (totalDistance >= 100) 
 	{
 		alert("You win!")
+		flagCapture = true;
 		resetGame();		
 
 	}
-		else {alert("You have " + pointTotal + "points and at a distance of " + totalDistance + "l/100");
+		else {alert("You have " + pointTotal + "points and at a distance of " + totalDistance + "/100");
 		}
 		
 
 }
 	resetGame();
-
-displayResults()
 
