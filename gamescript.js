@@ -1,57 +1,129 @@
-alert("Hello welcome to capture the flag!  Your goal is to race across map to reach the other players flag before they reach yours. ");
+//console.log("");
+alert("Hello welcome to the Race Game!  Your goal is to race across map to reach the other side with as much points as possible, and without dying.");
 
-alert("Your are the first to roll!  Click roll");
+let flagCapture = false;
+let diceList = [4, 6, 8, 10, 12];
+let pointTotal = 0;
+let totalDistance = 0;
 
 
 
+function gameFlow (diceselected) 
 
-function gameFlow (random1) 
+{	
+	let result = 0;
+	result = rollDice(diceselected);
+	
+	if (result<= 0) 
+	{
+		result= 0;
+	}
+	return result;
+}
+
+function rollDice (randomNum) 
+{
+	
+	let result = Math.floor((Math.random() * randomNum) + 1);
+	return result;
+
+}
+
+function diceSelector ()
+{
+		let dicePicked = prompt("Uh-oh! You've encountered a problem.  Enter a dice to roll to see what happens!; 4, 6, 8, 10, 12")
+
+	return dicePicked;
+}
+
+
+function pointsSystem(usingdice1,diceresult, pointtotal) 
+
+{
+		if (diceresult == usingdice1 ) 
+		{
+			console.log("You were approached by a wild animal an was mortally wounded!  Gameover!")
+			pointtotal = 0;
+			totalDistance = 0;
+			
+		}
+		
+
+		else if (diceresult == usingdice1/3 || diceresult == usingdice1/6) 
+		{
+			console.log("You fell into a pit!  You've lost 15 points!")
+			pointtotal -= 15;
+
+		}	
+
+		else if (diceresult == 5 || usingdice1 == 1) // 5, 8, 12, or 10
+		{
+			console.log("You were approached by a wild animal an was seriously wounded!  You've lost 30 points!")
+			pointtotal -= 30;
+
+		}
+		else if (usingdice1 != 10 && diceresult == usingdice1/2) 
+		{
+			console.log("Nothing happened! You just move forward")
+		}
+
+		else 
+		{
+
+			console.log("You found treasure!")
+			pointtotal += 20;
+		}
+
+		if (pointtotal <= 0) 
+		{
+			pointtotal = 0
+
+		}
+
+		return pointtotal;
+
+}
+
+
+function resetGame() 
+{
+		totalDistance = 0;
+		pointTotal = 0;
+		flagCapture = false;
+		//alert("Hello welcome to the Race Game!  Your goal is to race across map to reach the other side with as much points as possible, and without dying.");
+
+}
+
+
+	
+		while(flagCapture == false) 
 
 {
 
-	let randomchoser = rollDice(20);
+		let resultDice = 0;
+		let usingdDice = 0;
 
-	if (randomchoser == 1 || 2 || 3 || 4) 
+		totalDistance += gameFlow(20); //dice is rolled, and returns distance
+
+		usingDice = diceSelector();
+		resultDice = gameFlow(usingDice)
+		pointTotal += pointsSystem(usingDice, resultDice, pointTotal);
+		usingDice = 0;
+		resultDice = 0;
+
+		
+		if (totalDistance >= 100) 
 	{
-		random1 = parseInt(randomPit);
+		alert("You win!")
+		resetGame();		
 
 	}
-	else if (randomchoser == 5 || 6 || 7|| 8) 
-	{
-		random1 = parseInt(randomForwards);
-	}
-
-	else if (randomchoser == 9|| 10 || 11 || 12) 
-	{
-		random1 = parseInt(randomBackwards);
-	}
-
-	else if (randomchoser == 13|| 14 || 15 || 16) 
-	{
-		random1 = parseInt(randomTreasure);
-	}
-
-
-	else 
-	{
-		random1 = parseInt(randomAnimal);
-	}
-	
-
-	return random1;
-}
-
-
-function rollDice (randomNum) {
-
-let result = Math.floor(Math.random() * (randomNum+1));
-
-return result;
+		else {alert("You have " + pointTotal + "points and at a distance of " + totalDistance + "l/100");
+		}
+		
 
 }
+	resetGame();
 
-
-
-console.log(
-
+displayResults()
 
